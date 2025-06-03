@@ -13,10 +13,22 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Parte } from '../../../core/models/partes.model';
 import { MessageModule } from 'primeng/message';
 import { CardModule } from 'primeng/card';
+import { CpfCnpjPipe } from '../../../core/pipes/cpf-cnpj.pipe';
 
 @Component({
   selector: 'app-partes-listagem',
-  imports: [TableModule, TagModule, IconFieldModule, InputTextModule, InputIconModule, MultiSelectModule, SelectModule, MessageModule, CardModule],
+  imports: [
+    TableModule,
+    TagModule,
+    IconFieldModule,
+    InputTextModule,
+    InputIconModule,
+    MultiSelectModule,
+    SelectModule,
+    MessageModule,
+    CardModule,
+    CpfCnpjPipe
+  ],
   templateUrl: './listagem-partes.component.html',
   styleUrl: './listagem-partes.component.css',
 })

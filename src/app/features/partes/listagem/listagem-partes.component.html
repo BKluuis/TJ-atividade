@@ -18,7 +18,7 @@
           <tr>
               <td>{{ parte.nome }}</td>
               <td>{{ parte.tipoPessoa }}</td>
-              <td>{{ parte.cpfCnpj }}</td>
+              <td>{{ parte.cpfCnpj | cpfCnpj }}</td>
               <td>{{ parte.email }}</td>
               <td>
                   <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="editarParte(parte)">Editar</button>

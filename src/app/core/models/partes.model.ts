@@ -1,6 +1,6 @@
 export interface Parte {
   nome: string;
-  tipoPessoa: string;
+  tipoPessoa: 'FISICA' | 'JURIDICA';
   cpfCnpj: string;
   email: string;
 }

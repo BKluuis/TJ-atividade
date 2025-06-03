@@ -5,7 +5,13 @@ border-top-left-radius: 0 !important;
 border-bottom-left-radius: 0 !important;
 }
 
-.p-inputgroupaddon {
+.inputgroupaddon {
   width: 20% !important;
   overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .inputgroupaddon {
+    width: 40% !important;
+  }
 }

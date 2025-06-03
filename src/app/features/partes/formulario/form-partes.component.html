@@ -1,27 +1,22 @@
 <!-- cadastro-partes.component.html -->
 <form [formGroup]="parteForm" (ngSubmit)="onSubmit()" class="p-fluid">
-  @if(parteForm.invalid && parteForm.touched) {
+  @if(errors.length > 0) {
     <p-message severity="error" class="error-message">
       <ul>
-        @if(f['nome'].touched && f['nome'].invalid) {
-          <li>Nome é obrigatório e deve ter pelo menos 3 letras</li>
-        }
-        @if(f['documento'].touched && f['documento'].errors?.['cpfCnpjInvalido']) {
-          <li>CPF ou CNPJ inválido</li>
-        }
-        @if(f['email'].touched && f['email'].invalid) {
-          <li>E-mail inválido</li>
+        @for(error of errors; track error) {
+          <li>{{ error }}</li>
         }
       </ul>
     </p-message>
     <br>
-    <br>
   }
 
 
+
   <p-inputgroup>
-    <p-inputgroup-addon>
+    <p-inputgroup-addon class="inputgroupaddon">
       <label for="nome">Nome completo</label>
+      <app-required/>
     </p-inputgroup-addon>
     <input id="nome" type="text" pInputText formControlName="nome" />
   </p-inputgroup>
@@ -29,8 +24,9 @@
   <br>
 
   <p-inputgroup>
-    <p-inputgroup-addon class="">
+    <p-inputgroup-addon class="inputgroupaddon">
       <label for="tipoPessoa">Tipo de Pessoa</label>
+      <app-required/>
     </p-inputgroup-addon>
     <p-dropdown
       id="tipoPessoa"
@@ -45,9 +41,10 @@
   <br>
 
   <p-inputGroup>
-    <p-inputgroup-addon>
+    <p-inputgroup-addon class="inputgroupaddon">
       <label for="documento">CPF ou CNPJ</label>
-    </p-inputgroup-addon>
+      <app-required/>
+  </p-inputgroup-addon>
     <input id="documento" type="text" pInputText formControlName="documento"
            [placeholder]="placeholderDocumento" />
   </p-inputGroup>
@@ -55,8 +52,9 @@
   <br>
 
   <p-inputGroup>
-    <p-inputgroup-addon>
+    <p-inputgroup-addon class="inputgroupaddon">
       <label for="email">E-mail</label>
+      <app-required/>
     </p-inputgroup-addon>
     <input id="email" type="email" pInputText formControlName="email" />
   </p-inputGroup>
