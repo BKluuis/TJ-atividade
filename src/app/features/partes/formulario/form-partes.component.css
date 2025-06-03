@@ -1,0 +1,11 @@
+.p-inputgroup .p-inputtext
+{
+width: 100% !important;
+border-top-left-radius: 0 !important;
+border-bottom-left-radius: 0 !important;
+}
+
+.p-inputgroupaddon {
+  width: 20% !important;
+  overflow: hidden;
+}

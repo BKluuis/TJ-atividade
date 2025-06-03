@@ -1,0 +1,67 @@
+<!-- cadastro-partes.component.html -->
+<form [formGroup]="parteForm" (ngSubmit)="onSubmit()" class="p-fluid">
+  @if(parteForm.invalid && parteForm.touched) {
+    <p-message severity="error" class="error-message">
+      <ul>
+        @if(f['nome'].touched && f['nome'].invalid) {
+          <li>Nome é obrigatório e deve ter pelo menos 3 letras</li>
+        }
+        @if(f['documento'].touched && f['documento'].errors?.['cpfCnpjInvalido']) {
+          <li>CPF ou CNPJ inválido</li>
+        }
+        @if(f['email'].touched && f['email'].invalid) {
+          <li>E-mail inválido</li>
+        }
+      </ul>
+    </p-message>
+    <br>
+    <br>
+  }
+
+
+  <p-inputgroup>
+    <p-inputgroup-addon>
+      <label for="nome">Nome completo</label>
+    </p-inputgroup-addon>
+    <input id="nome" type="text" pInputText formControlName="nome" />
+  </p-inputgroup>
+
+  <br>
+
+  <p-inputgroup>
+    <p-inputgroup-addon class="">
+      <label for="tipoPessoa">Tipo de Pessoa</label>
+    </p-inputgroup-addon>
+    <p-dropdown
+      id="tipoPessoa"
+      formControlName="tipoPessoa"
+      [options]="tiposPessoa"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Selecione o tipo">
+    </p-dropdown>
+  </p-inputgroup>
+
+  <br>
+
+  <p-inputGroup>
+    <p-inputgroup-addon>
+      <label for="documento">CPF ou CNPJ</label>
+    </p-inputgroup-addon>
+    <input id="documento" type="text" pInputText formControlName="documento"
+           [placeholder]="placeholderDocumento" />
+  </p-inputGroup>
+
+  <br>
+
+  <p-inputGroup>
+    <p-inputgroup-addon>
+      <label for="email">E-mail</label>
+    </p-inputgroup-addon>
+    <input id="email" type="email" pInputText formControlName="email" />
+  </p-inputGroup>
+
+  <br>
+
+  <button pButton type="submit" label="Salvar" [disabled]="parteForm.invalid"></button>
+</form>

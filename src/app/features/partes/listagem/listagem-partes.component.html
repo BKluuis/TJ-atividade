@@ -1,1 +1,30 @@
-<p>listagem works!</p>
+@if(partes.length === 0) {
+  <p-card>
+    <h2>Lista de Partes</h2>
+    <p>Não há partes cadastradas</p>
+  </p-card>
+} @else {
+  <p-table #partesTable [value]="partes" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #header>
+          <tr>
+              <th>Nome</th>
+              <th>Tipo</th>
+              <th>CPF/CNPJ</th>
+              <th>E-mail</th>
+              <th>Ações</th>
+          </tr>
+      </ng-template>
+      <ng-template #body let-parte>
+          <tr>
+              <td>{{ parte.nome }}</td>
+              <td>{{ parte.tipoPessoa }}</td>
+              <td>{{ parte.cpfCnpj }}</td>
+              <td>{{ parte.email }}</td>
+              <td>
+                  <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="editarParte(parte)">Editar</button>
+                  <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="excluirParte(parte)">Excluir</button>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+}
