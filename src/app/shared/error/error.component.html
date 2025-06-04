@@ -1,0 +1,14 @@
+<p-card>
+  <h2>Erro!</h2>
+  <p>
+    Oops! Parece que algo deu errado enquanto processavamos sua requisição.
+    Tente novamente mais tarde ou entre em contato conosco.
+  </p>
+
+  @if(menssagem) {
+  <p>O seguinte erro ocorreu: {{ menssagem }}</p>
+  }
+  <p-footer>
+    <button pButton (click)="onVoltar()">Clique aqui para voltar</button>
+  </p-footer>
+</p-card>

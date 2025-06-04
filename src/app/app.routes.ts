@@ -9,5 +9,6 @@ export const routes: Routes = [
   { path: 'partes', component: PartesComponent },
   { path: 'partes/:parteId', component: EditarPartesComponent },
   { path: 'processos', component: ConsultaProcessosComponent },
-  { path: 'processos/:id', component: DetalhesUnidadeComponent }
+  { path: 'processos/:id', component: DetalhesUnidadeComponent },
+  { path: '**', redirectTo: 'partes' },
 ];

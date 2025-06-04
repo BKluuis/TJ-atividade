@@ -1,1 +1,47 @@
-<p>consulta works!</p>
+@if(processos.length === 0) {
+<p-message severity="info" class="no-processos-message">
+  Nenhum processo encontrado.
+</p-message>
+} @else {
+<p-table
+  [value]="processos"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [globalFilterFields]="['grau', 'justica']"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Código da Unidade</th>
+      <th>Assuntos Principais</th>
+      <th>Classe Judicial</th>
+
+      <th pSortableColumn="grau">
+        Grau
+        <p-columnFilter
+          field="grau"
+          matchMode="contains"
+          display="menu"
+        ></p-columnFilter>
+      </th>
+
+      <th pSortableColumn="justica">
+        Justiça
+        <p-columnFilter
+          field="justica"
+          matchMode="contains"
+          display="menu"
+        ></p-columnFilter>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-processo>
+    <tr>
+      <td>{{ processo.unidade }}</td>
+      <td>{{ processo.assuntos }}</td>
+      <td>{{ processo.classe }}</td>
+      <td>{{ processo.grau }}</td>
+      <td>{{ processo.justica }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+}

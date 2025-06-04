@@ -1,7 +1,11 @@
-<app-header/>
-<p-divider/>
+<app-header />
+<p-divider />
 <main class="main">
   <div class="content">
+    @if(error){
+    <app-error />
+    } @else {
     <router-outlet />
+    }
   </div>
 </main>
