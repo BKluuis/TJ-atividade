@@ -4,13 +4,20 @@ Este projeto é uma aplicação Angular para consulta e gerenciamento de process
 
 ## Como rodar o projeto
 
-1. Instale as dependências:
+1. Clone o projeto e acesse a pasta
+
+```bash
+git clone https://github.com/BKluuis/TJ-atividade.git
+cd .\TJ-atividade\
+```
+
+2. Instale as dependências:
 
 ```bash
 npm install
 ```
 
-2. Inicie o servidor de desenvolvimento:
+3. Inicie o servidor de desenvolvimento:
 
 ```bash
 npm start
