@@ -1,8 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, tap } from 'rxjs';
+import { map, throwError } from 'rxjs';
 
 import { Processo } from '../models/processo.model';
+
+interface ProcessoRequestBody {
+  size: number;
+  sort: { '@timestamp': { order: string } }[];
+  search_after?: number[];
+}
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +18,17 @@ export class ProcessosService {
 
   getProcessos() {
     return this.httpClient
-      .get<Processo[]>('/api/api_publica_tjrn/_search', {
-        headers: {
-          Authorization:
-            'APIKey cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw==',
-          'Content-Type': 'application/json',
-        },
-      })
+      .post<Processo[]>(
+        '/api/api_publica_tjrn/_search',
+        { size: 200 },
+        {
+          headers: {
+            Authorization:
+              'APIKey cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw==',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
       .pipe(map((res) => this.mapFromResponse(res)));
   }
 

@@ -1,12 +1,19 @@
-@if(processos.length === 0) {
+@if(carregando) {
+<div class="center">
+  <p-progress-spinner ariaLabel="loading" />
+</div>
+} @else if(processos.length === 0) {
 <p-message severity="info" class="no-processos-message">
   Nenhum processo encontrado.
 </p-message>
 } @else {
 <p-table
   [value]="processos"
+  [rows]="10"
+  [paginator]="true"
+  paginatorPosition="top"
+  [showCurrentPageReport]="true"
   [tableStyle]="{ 'min-width': '50rem' }"
-  [globalFilterFields]="['grau', 'justica']"
 >
   <ng-template pTemplate="header">
     <tr>
@@ -14,16 +21,17 @@
       <th>Assuntos Principais</th>
       <th>Classe Judicial</th>
 
-      <th pSortableColumn="grau">
+      <th>
         Grau
         <p-columnFilter
           field="grau"
           matchMode="contains"
           display="menu"
+          [showMenu]="true"
         ></p-columnFilter>
       </th>
 
-      <th pSortableColumn="justica">
+      <th>
         Justiça
         <p-columnFilter
           field="justica"

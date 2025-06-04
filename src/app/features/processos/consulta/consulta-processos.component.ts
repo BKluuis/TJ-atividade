@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { TableModule } from 'primeng/table';
+import { TableModule, TablePageEvent } from 'primeng/table';
 import { catchError, throwError } from 'rxjs';
 import { Processo } from '../../../core/models/processo.model';
 import { ErrorService } from '../../../core/services/error.service';
 import { ProcessosService } from '../../../core/services/processos.service';
 import { MessageModule } from 'primeng/message';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-consulta',
-  imports: [TableModule, MessageModule],
+  imports: [TableModule, MessageModule, ProgressSpinnerModule],
   templateUrl: './consulta-processos.component.html',
   styleUrl: './consulta-processos.component.css',
 })
 export class ConsultaProcessosComponent implements OnInit {
   processos: Processo[] = [];
+  carregando = true;
 
   constructor(
     private processosService: ProcessosService,
@@ -21,6 +23,7 @@ export class ConsultaProcessosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.carregando = true;
     this.processosService
       .getProcessos()
       .pipe(
@@ -30,8 +33,15 @@ export class ConsultaProcessosComponent implements OnInit {
           return throwError(() => new Error('Erro ao carregar os processos.'));
         })
       )
-      .subscribe((data) => {
-        this.processos = data.sort((a, b) => a.numero.localeCompare(b.numero));
+      .subscribe({
+        next: (data) => {
+          this.processos = data.sort((a, b) =>
+            a.numero.localeCompare(b.numero)
+          );
+        },
+        complete: () => {
+          this.carregando = false;
+        },
       });
   }
 }
