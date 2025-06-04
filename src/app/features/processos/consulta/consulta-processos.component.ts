@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { catchError, throwError } from 'rxjs';
 import { Processo } from '../../../core/models/processo.model';
@@ -6,6 +6,7 @@ import { ErrorService } from '../../../core/services/error.service';
 import { ProcessosService } from '../../../core/services/processos.service';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-consulta',
@@ -19,7 +20,8 @@ export class ConsultaProcessosComponent implements OnInit {
 
   constructor(
     private processosService: ProcessosService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private destroyRef: DestroyRef
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +29,7 @@ export class ConsultaProcessosComponent implements OnInit {
     this.processosService
       .getProcessos()
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         catchError((error) => {
           this.errorService.mostrarErro('Erro ao carregar os processos.');
           console.log(error);
