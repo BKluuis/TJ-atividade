@@ -1,65 +1,76 @@
 <!-- cadastro-partes.component.html -->
-<form [formGroup]="parteForm" (ngSubmit)="onSubmit()" class="p-fluid">
-  @if(errors.length > 0) {
+<p-card>
+  <form
+    [formGroup]="parteForm"
+    (ngSubmit)="onSubmit()"
+    class="p-fluid partes-form"
+  >
+    @if(errors.length > 0) {
     <p-message severity="error" class="error-message">
       <ul>
         @for(error of errors; track error) {
-          <li>{{ error }}</li>
+        <li>{{ error }}</li>
         }
       </ul>
     </p-message>
-    <br>
-  }
+    <br />
+    }
 
+    <p-inputgroup>
+      <p-inputgroup-addon class="inputgroupaddon">
+        <label for="nome">Nome completo</label>
+        <app-required />
+      </p-inputgroup-addon>
+      <input id="nome" type="text" pInputText formControlName="nome" />
+    </p-inputgroup>
 
+    <p-inputgroup>
+      <p-inputgroup-addon class="inputgroupaddon">
+        <label for="tipoPessoa">Tipo de Pessoa</label>
+        <app-required />
+      </p-inputgroup-addon>
+      <p-dropdown
+        id="tipoPessoa"
+        formControlName="tipoPessoa"
+        [options]="tiposPessoa"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Selecione o tipo"
+      >
+      </p-dropdown>
+    </p-inputgroup>
 
-  <p-inputgroup>
-    <p-inputgroup-addon class="inputgroupaddon">
-      <label for="nome">Nome completo</label>
-      <app-required/>
-    </p-inputgroup-addon>
-    <input id="nome" type="text" pInputText formControlName="nome" />
-  </p-inputgroup>
+    <p-inputGroup>
+      <p-inputgroup-addon class="inputgroupaddon">
+        <label for="documento">CPF ou CNPJ</label>
+        <app-required />
+      </p-inputgroup-addon>
+      <input
+        id="documento"
+        type="text"
+        pInputText
+        formControlName="documento"
+        [placeholder]="placeholderDocumento"
+      />
+    </p-inputGroup>
 
-  <br>
+    <p-inputGroup>
+      <p-inputgroup-addon class="inputgroupaddon">
+        <label for="email">E-mail</label>
+        <app-required />
+      </p-inputgroup-addon>
+      <input id="email" type="email" pInputText formControlName="email" />
+    </p-inputGroup>
 
-  <p-inputgroup>
-    <p-inputgroup-addon class="inputgroupaddon">
-      <label for="tipoPessoa">Tipo de Pessoa</label>
-      <app-required/>
-    </p-inputgroup-addon>
-    <p-dropdown
-      id="tipoPessoa"
-      formControlName="tipoPessoa"
-      [options]="tiposPessoa"
-      optionLabel="label"
-      optionValue="value"
-      placeholder="Selecione o tipo">
-    </p-dropdown>
-  </p-inputgroup>
+    <p-message>
+      Preencha todos os campos marcados com <app-required />
+    </p-message>
 
-  <br>
-
-  <p-inputGroup>
-    <p-inputgroup-addon class="inputgroupaddon">
-      <label for="documento">CPF ou CNPJ</label>
-      <app-required/>
-  </p-inputgroup-addon>
-    <input id="documento" type="text" pInputText formControlName="documento"
-           [placeholder]="placeholderDocumento" />
-  </p-inputGroup>
-
-  <br>
-
-  <p-inputGroup>
-    <p-inputgroup-addon class="inputgroupaddon">
-      <label for="email">E-mail</label>
-      <app-required/>
-    </p-inputgroup-addon>
-    <input id="email" type="email" pInputText formControlName="email" />
-  </p-inputGroup>
-
-  <br>
-
-  <button pButton type="submit" label="Salvar" [disabled]="parteForm.invalid"></button>
-</form>
+    <button
+      pButton
+      type="submit"
+      label="Salvar"
+      [disabled]="parteForm.invalid"
+    ></button>
+  </form>
+</p-card>

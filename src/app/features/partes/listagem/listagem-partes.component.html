@@ -21,7 +21,7 @@
               <td>{{ parte.cpfCnpj | cpfCnpj }}</td>
               <td>{{ parte.email }}</td>
               <td>
-                  <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="editarParte(parte)">Editar</button>
+                  <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="editarParte(parte.id)">Editar</button>
                   <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="excluirParte(parte)">Excluir</button>
               </td>
           </tr>

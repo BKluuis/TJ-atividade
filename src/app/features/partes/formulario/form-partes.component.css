@@ -15,3 +15,10 @@ border-bottom-left-radius: 0 !important;
     width: 40% !important;
   }
 }
+
+.partes-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
